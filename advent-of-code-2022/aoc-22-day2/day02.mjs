@@ -8,34 +8,35 @@ const gameStrategy = readFileSync("day02-input.txt", { encoding: "utf-8" }) // r
   
   let totalScore = 0
   const rock = {
-    letter: "A" || "X",
+    opponentLetter: "A",
+    playerLetter: "X",
     score: 1
   }
 
   const paper = {
-    letter: "B" || "Y",
+    opponentLetter: "B",
+    playerLetter: "Y",
     score: 2
   }
 
   const scissors = {
-    letter: "C" || "Z",
+    opponentLetter: "C",
+    playerLetter: "Z",
     score: 3
   }
 
   const result = (opponent, player) => {
-    console.log(`opponent is: ${opponent}`)
-    console.log(`player is: ${player}`)
-    if ((opponent === rock.letter && player === scissors.letter) || 
-        (opponent === paper.letter && player === rock.letter) || 
-        (opponent === scissors.letter && player === paper.letter)) {
+    if ((player === rock.playerLetter && opponent === scissors.opponentLetter) || 
+        (player === paper.playerLetter && opponent === rock.opponentLetter) || 
+        (player === scissors.playerLetter && opponent === paper.opponentLetter)) {
         console.log(`=========1`)
-        return totalScore +=0
-    }
-    if ((player === rock.letter && opponent === scissors.letter) || 
-        (player === paper.letter && opponent === rock.letter) || 
-        (player === scissors.letter && opponent === paper.letter)) {
-        console.log(`=========2`)
         return totalScore +=6
+    }
+    if ((opponent === rock.opponentLetter && player === scissors.playerLetter) || 
+        (opponent === paper.opponentLetter && player === rock.playerLetter) || 
+        (opponent === scissors.opponentLetter && player === paper.playerLetter)) {
+        console.log(`=========2`)
+        return totalScore +=0
     }
     console.log(`=========3`)
     return totalScore +=3
@@ -47,8 +48,6 @@ function part1() {
     const rounds = gameStrategy.map(round => {
         console.log(`round is: ${round}`)
         const turn = round.split(" ")
-        console.log(`turn[0] is: ${turn[0]}`) 
-        console.log(`turn[1] is: ${turn[1]}`) 
  
         result(turn[0], turn[1])
         console.log(`totalScore is: ${totalScore}`)
