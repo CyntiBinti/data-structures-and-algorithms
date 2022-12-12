@@ -12,15 +12,13 @@ const allRucksackContents = readFileSync("day03-input.txt", { encoding: "utf-8" 
 
 function part1() {
     const compartment = allRucksackContents.map(rucksack => {
-        rucksack.split((rucksack.length / 2));
+        const halfARucksack = Math.round(rucksack.length/2);
+        const compartment1 = rucksack.slice(0, halfARucksack);
+        const compartment2 = rucksack.slice(halfARucksack)
+        console.log(`compartment1 is: ${compartment1}`)
+        console.log(`compartment2 is: ${compartment2}`)
     })
-    
-    const compartment1 = compartment[0];
-    const compartment2 = compartment[1];
 
-    console.log(`compartment is: ${compartment}`)
-    console.log(`compartment1 is: ${compartment1}`)
-    console.log(`compartment2 is: ${compartment2}`)
 
 }
 
