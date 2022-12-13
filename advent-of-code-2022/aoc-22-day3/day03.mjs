@@ -16,26 +16,27 @@ const allRucksackContents = readFileSync("day03-input.txt", { encoding: "utf-8" 
     for (const item of compartmentB) {
       if (rucksackCompartment.has(item)) {
         duplicateItem.push(item);
-        console.log(`duplicate item is: ${duplicateItem}`)
         return;
       }
     }
     return rucksackCompartment;
   }
 
+
   // this function takes an input, and for each element it will push the index value of that element inside an array, and then a reduce function will sum the total of that array
   function sumOfPriorityItems(duplicateItem) {
     const priorityItemValues = [];
+    let priorityTotal = 0;
+    const reduceStartingValue = 0;
     for (const item of duplicateItem) {
       priorityItemValues.push((alphabet.indexOf(item) + 1))
-      console.log(`priorityItemValues are: ${priorityItemValues}`)
-      const priorityTotal = priorityItemValues.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
-      console.log(`priorityTotal is: ${priorityTotal}`)
+      priorityTotal = priorityItemValues.reduce((previousValue, currentValue) => previousValue + currentValue, reduceStartingValue)
     }
+    console.log(`priorityTotal is: ${priorityTotal}`)
   }
 
-function part1() {
 
+function part1() {
   // loops through each rucksack and for each rucksack it splits the contents into 2 equal compartments
   const compartment = allRucksackContents.map(rucksack => {
     const halfARucksack = Math.round(rucksack.length/2);
@@ -44,12 +45,12 @@ function part1() {
 
     // pass these newly created compartment halves into this function that will check for duplicate letters/items
     rucksackCompartmentCheck(compartment1, compartment2);
-
-    // loops through the duplicateItem array and stores the index of each letter (when checked against the alphabet array) into a reducer function, to get the final sum
-    sumOfPriorityItems(duplicateItem);
-
   })
+
+  // loops through the duplicateItem array and stores the index of each letter (when checked against the alphabet array) into a reducer function, to get the final sum
+  sumOfPriorityItems(duplicateItem);
 }
+
 
 function part2() {
 
