@@ -6,7 +6,7 @@ const sectionPairs = readFileSync("day04-input.txt", { encoding: "utf-8" }) // r
   .trim() // Remove starting/ending whitespace
   .split("\n"); // Split where it finds a single new line and create a 2D substring array (at the point of the single newline)
 
-  const overlapCounter = 0;
+  let overlapCounter = 0;
 
 function part1() {
 
@@ -23,7 +23,14 @@ function part1() {
     const secondElfSectionStartID = secondElf[0];
     const secondElfSectionEndID = secondElf[1];
 
+    if ((firstElfSectionStartID <= secondElfSectionStartID) && (firstElfSectionEndID >= secondElfSectionEndID) ||
+    (secondElfSectionStartID <= firstElfSectionStartID) && (secondElfSectionEndID >= firstElfSectionEndID )) {
+      overlapCounter ++
+    }
+
   })
+  console.log(`overlapCounter is: ${overlapCounter}`)
+  return overlapCounter;
 
 }
 
