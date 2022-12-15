@@ -16,15 +16,15 @@ function part1() {
     const secondElfSection = aSection[1]
 
     const firstElf = firstElfSection.toString().split("-");
-    const firstElfSectionStartID = firstElf[0];
-    const firstElfSectionEndID = firstElf[1];
+    const firstElfSectionStartID = Number(firstElf[0]);
+    const firstElfSectionEndID = Number(firstElf[1]);
 
     const secondElf = secondElfSection.toString().split("-");
-    const secondElfSectionStartID = secondElf[0];
-    const secondElfSectionEndID = secondElf[1];
+    const secondElfSectionStartID = Number(secondElf[0]);
+    const secondElfSectionEndID = Number(secondElf[1]);
 
     if ((firstElfSectionStartID <= secondElfSectionStartID) && (firstElfSectionEndID >= secondElfSectionEndID) ||
-    (secondElfSectionStartID <= firstElfSectionStartID) && (secondElfSectionEndID >= firstElfSectionEndID )) {
+    (firstElfSectionStartID >= secondElfSectionStartID) && (firstElfSectionEndID <= secondElfSectionEndID )) {
       overlapCounter ++
     }
 
