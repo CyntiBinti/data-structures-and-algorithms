@@ -16,6 +16,7 @@ const stackIndexes = parsedStacks.pop();
 const stacks = {};
 
 for (const line of parsedStacks) {
+  console.log(line[1])
   for (let i = 0; i < line.length; i++) {
     if (line[i] !== " ") {
       if (!stacks[stackIndexes[i]]) {
@@ -27,7 +28,7 @@ for (const line of parsedStacks) {
   }
 }
 
-console.log(stacks)
+// console.log(stacks)
 
 function part1() {
 
