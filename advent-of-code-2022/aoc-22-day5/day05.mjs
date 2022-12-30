@@ -45,8 +45,17 @@ for (const move of stackMoves) {
   });
 }
 
-
 function part1() {
+  for (const move of moves) {
+    for (let i = move.count; i > 0; i--) {
+      const crateRemoved = stacks[move.from].pop();
+      stacks[move.to].push(crateRemoved);
+    }
+  }
+  console.log(stacks)
+
+  const topCrates = [];
+  
 
 }
 
