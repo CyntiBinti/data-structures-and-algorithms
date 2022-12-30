@@ -74,22 +74,20 @@ function part2() {
 
   // create copy of stacks object so that original stacks object stays untouched
   const localStacks = JSON.parse(JSON.stringify(stacks));
-  console.log(`localStacks: ${JSON.stringify(localStacks)}`)
-  // loop over each move line and pop the crate on the 'from' stack and push it onto the 'to' stack
-  
-  for (const move of moves) {
-    console.log(`move: ${JSON.stringify(move)}`)
-    const cratesRemoved = [];
-    for (let i = move.count; i > 0; i--) {
-      
-      const crateRemoved = localStacks[move.from].pop();
-      console.log(`crate removed: ${crateRemoved}`)
-      cratesRemoved.push(crateRemoved)
-      console.log(`crates removed array now: ${cratesRemoved}`)
 
+  // loop over each move line and then:
+    // for as many move.counts, pop + push the crate 'from' into a cratesRemoved array (this essentially pushes a 2D array into the relevant localStacks object)
+    // so to remove the 2D array behaviour, we then spread the contents + reverse the order of the cratesRemoved array (this also then creates a new 2D array)
+    // so then finally spread this new array again and push it onto the crate 'to' position of localStacks (no more nested arrays :D ... yay!)
+  for (const move of moves) {
+
+    const cratesRemoved = [];
+
+    for (let i = move.count; i > 0; i--) {
+      const crateRemoved = localStacks[move.from].pop();
+      cratesRemoved.push(crateRemoved)
     }
-    localStacks[move.to].push([...cratesRemoved].reverse());
-    console.log(`localStacks: ${JSON.stringify(localStacks)}`)
+    localStacks[move.to].push(...[...cratesRemoved].reverse());
   }
 
   // store the values of the localStacks object into an array, then map over this 2D array to push the last index crate into the topCrates array, then join the letters without spacing
