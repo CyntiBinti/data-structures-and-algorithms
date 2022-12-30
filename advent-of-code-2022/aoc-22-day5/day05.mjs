@@ -1,4 +1,4 @@
-// Thanks to @tpatel for their helpful Youtube vid in going over this particular coding challenge!
+// Thanks to @tpatel (https://github.com/tpatel/advent-of-code-2022/blob/main/day05.mjs) for their helpful Youtube vid in going over this particular coding challenge!
 
 import { readFileSync } from "node:fs";
 
@@ -46,16 +46,25 @@ for (const move of stackMoves) {
 }
 
 function part1() {
+
+  const localStacks = JSON.parse(JSON.stringify(stacks));
+
+  // loop over each move line and pop the crate on the 'from' stack and push it onto the 'to' stack
   for (const move of moves) {
     for (let i = move.count; i > 0; i--) {
-      const crateRemoved = stacks[move.from].pop();
-      stacks[move.to].push(crateRemoved);
+      const crateRemoved = localStacks[move.from].pop();
+      localStacks[move.to].push(crateRemoved);
     }
   }
-  console.log(stacks)
 
-  const topCrates = [];
-  
+  console.log(
+    stackIndexes
+      .map((value) => {
+        const stack = localStacks[value];
+        return stack[stack.length - 1];
+      })
+      .join("")
+  );
 
 }
 
