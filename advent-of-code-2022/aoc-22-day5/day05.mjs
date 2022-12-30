@@ -1,4 +1,4 @@
-// Thanks to @tpatel (https://github.com/tpatel/advent-of-code-2022/blob/main/day05.mjs) for their helpful Youtube vid in going over this particular coding challenge!
+// Thanks to @tpatel (https://github.com/tpatel/advent-of-code-2022/blob/main/day05.mjs) for their helpful Youtube vid for hints/tips going over this particular coding challenge!
 
 import { readFileSync } from "node:fs";
 
@@ -47,6 +47,7 @@ for (const move of stackMoves) {
 
 function part1() {
 
+  // create copy of stacks object so that original stacks object stays untouched for part2 of coding challenge
   const localStacks = JSON.parse(JSON.stringify(stacks));
 
   // loop over each move line and pop the crate on the 'from' stack and push it onto the 'to' stack
@@ -57,14 +58,14 @@ function part1() {
     }
   }
 
-  console.log(
-    stackIndexes
-      .map((value) => {
-        const stack = localStacks[value];
-        return stack[stack.length - 1];
-      })
-      .join("")
-  );
+  // store the values of the localStacks object into an array, then map over this 2D array to push the last index crate into the topCrates array, then join the letters without spacing
+  const topCrates = [];
+  let crateValues = Object.values(localStacks);
+
+  crateValues.map(stack => {
+    return topCrates.push(stack[stack.length - 1])
+  })
+  console.log(topCrates.join(""))
 
 }
 
