@@ -65,12 +65,41 @@ function part1() {
   crateValues.map(stack => {
     return topCrates.push(stack[stack.length - 1])
   })
-  console.log(topCrates.join(""))
+  console.log(`part 1 is: ${topCrates.join("")}`)
 
 }
 
 
 function part2() {
+
+  // create copy of stacks object so that original stacks object stays untouched
+  const localStacks = JSON.parse(JSON.stringify(stacks));
+  console.log(`localStacks: ${JSON.stringify(localStacks)}`)
+  // loop over each move line and pop the crate on the 'from' stack and push it onto the 'to' stack
+  
+  for (const move of moves) {
+    console.log(`move: ${JSON.stringify(move)}`)
+    const cratesRemoved = [];
+    for (let i = move.count; i > 0; i--) {
+      
+      const crateRemoved = localStacks[move.from].pop();
+      console.log(`crate removed: ${crateRemoved}`)
+      cratesRemoved.push(crateRemoved)
+      console.log(`crates removed array now: ${cratesRemoved}`)
+
+    }
+    localStacks[move.to].push([...cratesRemoved].reverse());
+    console.log(`localStacks: ${JSON.stringify(localStacks)}`)
+  }
+
+  // store the values of the localStacks object into an array, then map over this 2D array to push the last index crate into the topCrates array, then join the letters without spacing
+  const topCrates = [];
+  let crateValues = Object.values(localStacks);
+
+  crateValues.map(stack => {
+    return topCrates.push(stack[stack.length - 1])
+  })
+  console.log(`part 2 is: ${topCrates.join("")}`)
 
 }
  
