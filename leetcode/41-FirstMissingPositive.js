@@ -19,18 +19,22 @@ Write an efficient algorithm for the following assumptions:
 */
 
 function solutionA(A) {
+    // TO-DO: to write next is to cover negative integers/empty array inputs
+    // can run a filter on the input that filters out if num < 0 then return what's left
+    // and if that leaves the input array empty then return 1 as the smallest integer
+    // else continue with the below code!
+    
     const sortedArray = A.sort()
 
     const arrayHashMap = new Set(sortedArray);
 
-    for (let i = 1; i < sortedArray[sortedArray.length-1]; i++) {
+    for (let i = 1; i < 100000; i++) {
         if (!arrayHashMap.has(i)) {
-            console.log(`smallestInteger is: ${i}`)
             return i;
         }
     }
 }
 
-solutionA([1, 3, 6, 4, 1, 2]);
-solutionA([1, 2, 3]);
+console.log(`smallestInteger input1 is: ${solutionA([1, 3, 6, 4, 1, 2])}`)
+console.log(`smallestInteger input2 is: ${solutionA([1, 2, 3])}`)
 // solutionA([−1, −3])
