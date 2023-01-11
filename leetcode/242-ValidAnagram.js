@@ -20,6 +20,9 @@ s and t consist of lowercase English letters
 
 const isAnagram = (s, t) => {
 
+   if (s.length !== t.length) {
+    return false;
+   } else {
     const sSortedArray = [...s].sort();
     const tSortedArray = [...t].sort();
 
@@ -30,6 +33,7 @@ const isAnagram = (s, t) => {
             return false;
         }
     } return true;
+   }
 
 };
 
