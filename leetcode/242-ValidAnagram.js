@@ -22,20 +22,45 @@ const isAnagram = (s, t) => {
 
    if (s.length !== t.length) {
     return false;
-   } else {
-    const sSortedArray = [...s].sort();
-    const tSortedArray = [...t].sort();
+   } 
+   else {
 
-    const tSortedSet = new Set(tSortedArray);
+    const sUnicodeSum = [];
+    const tUnicodeSum = [];
 
-    for (const letter of sSortedArray) {
-        if (!tSortedSet.has(letter)) {
-            return false;
-        }
+    for (char of s) {
+        sUnicodeSum.push(char.charCodeAt(char));
+    }
+
+    const sUnicodeSumTotal = sUnicodeSum.reduce((prev, curr) => prev + curr, 0);
+
+    for (char of t) {
+        tUnicodeSum.push(char.charCodeAt(char));
+    }
+
+    const tUnicodeSumTotal = tUnicodeSum.reduce((prev, curr) => prev + curr, 0);
+
+    if (sUnicodeSumTotal !== tUnicodeSumTotal) {
+        return false;
     } return true;
-   }
 
-};
+
+//     const sSortedArray = [...s].sort();
+//     const tSortedArray = [...t].sort();
+
+//     const tSortedSet = new Set(tSortedArray);
+
+//     for (const letter of sSortedArray) {
+//         if (!tSortedSet.has(letter)) {
+//             return false;
+//         }
+//     } return true;
+//    }
+
+    };
+}
 
 console.log(`input 1 answer is: ${isAnagram('anagram', 'nagaram')}`); // true
 console.log(`input 2 answer is: ${isAnagram('rat', 'car')}`); // false
+console.log(`input 2 answer is: ${isAnagram('ac', 'bb')}`); // false
+
