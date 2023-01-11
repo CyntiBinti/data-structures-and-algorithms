@@ -24,43 +24,25 @@ const isAnagram = (s, t) => {
     return false;
    } 
    else {
+        const sSortedArray = [...s].sort();
+        const tSortedArray = [...t].sort();
 
-    const sUnicodeSum = [];
-    const tUnicodeSum = [];
+        const tSortedSet = new Set(tSortedArray);
+        // realised using the Set object isn't best as doesnt make new entries duplicate values, so duplicates are filtered out
+        // and thus if the remaining chars across both arrays are the same then it gives a false positive
+        // TO-DO: instead use a Map object as this creates a new entry for duplicate values (rather than ignoring them)
 
-    for (char of s) {
-        sUnicodeSum.push(char.charCodeAt(char));
-    }
+        for (const letter of sSortedArray) {
+            if (!tSortedSet.has(letter)) {
+                return false;
+            }
+        } return true;
+   };
 
-    const sUnicodeSumTotal = sUnicodeSum.reduce((prev, curr) => prev + curr, 0);
-
-    for (char of t) {
-        tUnicodeSum.push(char.charCodeAt(char));
-    }
-
-    const tUnicodeSumTotal = tUnicodeSum.reduce((prev, curr) => prev + curr, 0);
-
-    if (sUnicodeSumTotal !== tUnicodeSumTotal) {
-        return false;
-    } return true;
-
-
-//     const sSortedArray = [...s].sort();
-//     const tSortedArray = [...t].sort();
-
-//     const tSortedSet = new Set(tSortedArray);
-
-//     for (const letter of sSortedArray) {
-//         if (!tSortedSet.has(letter)) {
-//             return false;
-//         }
-//     } return true;
-//    }
-
-    };
-}
+};
 
 console.log(`input 1 answer is: ${isAnagram('anagram', 'nagaram')}`); // true
 console.log(`input 2 answer is: ${isAnagram('rat', 'car')}`); // false
-console.log(`input 2 answer is: ${isAnagram('ac', 'bb')}`); // false
+console.log(`input 3 answer is: ${isAnagram('ac', 'bb')}`); // false
+console.log(`input 4 answer is: ${isAnagram('aacc', 'ccac')}`); // false
 
