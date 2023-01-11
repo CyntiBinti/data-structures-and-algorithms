@@ -19,8 +19,19 @@ s and t consist of lowercase English letters
 */
 
 const isAnagram = (s, t) => {
-    
+
+    const sSortedArray = [...s].sort();
+    const tSortedArray = [...t].sort();
+
+    const tSortedSet = new Set(tSortedArray);
+
+    for (const letter of sSortedArray) {
+        if (!tSortedSet.has(letter)) {
+            return false;
+        }
+    } return true;
+
 };
 
-console.log(`input 1 answer is: ${isAnagram('anagram', 'nagaram')}`);
-console.log(`input 2 answer is: ${isAnagram('rat', 'car')}`);
+console.log(`input 1 answer is: ${isAnagram('anagram', 'nagaram')}`); // true
+console.log(`input 2 answer is: ${isAnagram('rat', 'car')}`); // false
