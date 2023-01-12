@@ -29,5 +29,22 @@ Only one valid answer exists
 */
 
 const twoSum = function(nums, target) {
-    
+    const updatedArray = [...nums].filter(num => num <= target)
+
+    const output = [];
+
+    for (let i = 0; i <updatedArray.length; i++) {
+        // loop through the array and check:
+        // if the length is === 2 then return the indices of those elements as they have to equal the target
+
+        if (updatedArray.length === 2) {
+            // push the 2 indices into the output array
+            // return the output array
+        }
+        // else...
+    }
 };
+
+console.log(`test1 is: ${twoSum([2, 7, 11, 15], 9)}`)
+console.log(`test2 is: ${twoSum([3, 2, 4], 6)}`)
+console.log(`test3 is: ${twoSum([3, 3], 6)}`)
