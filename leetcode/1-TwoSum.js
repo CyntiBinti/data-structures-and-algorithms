@@ -33,16 +33,19 @@ const twoSum = function(nums, target) {
 
     const output = [];
 
-    for (let i = 0; i <updatedArray.length; i++) {
-        // loop through the array and check:
-        // if the length is === 2 then return the indices of those elements as they have to equal the target
+    // loop through the array and check:
+    // if the length is === 2 then return the indices of those elements as they have to equal the target
+    if (updatedArray.length === 2) {
 
-        if (updatedArray.length === 2) {
-            // push the 2 indices into the output array
-            // return the output array
-        }
-        // else...
-    }
+        updatedArray.map((num => {
+            const index = updatedArray.indexOf(num);
+            output.push(index);
+        }))
+
+        return output;
+    } return false
+    // else...
+
 };
 
 console.log(`test1 is: ${twoSum([2, 7, 11, 15], 9)}`)
