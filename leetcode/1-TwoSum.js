@@ -34,17 +34,17 @@ const twoSum = function(nums, target) {
     const output = [];
 
     // loop through the array and check:
-    // if the length is === 2 then return the indices of those elements as they have to equal the target
+    // if the length is === 2 then return the indices of those elements as they'd have to equal the target
     if (updatedArray.length === 2) {
 
-        updatedArray.map((num => {
-            const index = updatedArray.indexOf(num);
-            output.push(index);
-        }))
-
+        // TO-DO: need to refactor this so that can handle duplicate values as gives a false positive i.e [3,3] gives output [0,0] instead of [0,1]
+        for (let i = 0; i < updatedArray.length; i++) {
+            const value = updatedArray[i];
+            output.push(updatedArray.indexOf(value))
+        }
         return output;
     } return false
-    // else...
+    // else blah blah blah...
 
 };
 
