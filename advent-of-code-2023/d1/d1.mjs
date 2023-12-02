@@ -27,7 +27,16 @@ function partTwo() {
         six: 6,
         seven: 7,
         eight: 8,
-        nine: 9
+        nine: 9,
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+        7: 7,
+        8: 8,
+        9: 9
     }
 
     const numbers = lines.map((line) => {
