@@ -44,60 +44,54 @@ function partTwo() {
 
 
     const numbers = lines.map(([...line]) => {
-        let finalFirstNumber = [];
-        let finalLastNumber = [];
 
         // to get the FIRST number
-        let firstWordNumber;
-        let firstNumber;
-        let firstArray = []
+        let finalFirstNumber = [];
+        let firstArray = [];
+
+            for (let i = 0; i < line.length; i++) {
+                if (finalFirstNumber.length === 0) {
+                    if (!Number.isNaN(Number(line[i]))) {
+                        finalFirstNumber.push(Number(line[i]));
+                    }
+
+                    firstArray.push(line[i]);
+
+                    const lineSubStringFirst = firstArray.join('');
+
+                    for (const [key, value] of Object.entries(numberLettersMap)) {
+                    if (lineSubStringFirst.includes(key)) {
+                        finalFirstNumber.push(value);
+                        }
+                    }
+                }
+            }
+        console.log('finalFirstNumber', finalFirstNumber)
+
 
         // to get the LAST number
-        let lastWordNumber;
-        let lastNumber;
-        let lastArray = []
-        let reversedLine = [...line].reverse()
+        let finalLastNumber = [];
+        let lastArray = [];
+        let reversedLine = [...line].reverse();
 
-        for (let i = 0; i < line.length; i++) {
-            if (!Number.isNaN(Number(line[i]))) {
-                firstNumber = Number(line[i]);
-                finalFirstNumber.push(firstNumber);
-                console.log('finalFirstNumber', finalFirstNumber)
-            }
-            if (!Number.isNaN(Number(reversedLine[i]))) {
-                lastNumber = Number(reversedLine[i]);
-                finalLastNumber.push(lastNumber);
-                console.log('finalLastNumber', finalLastNumber)
-            }
+            for (let i = 0; i < line.length; i++) {
+                if (finalLastNumber.length === 0) {
+                    if (!Number.isNaN(Number(reversedLine[i]))) {
+                        finalLastNumber.push(Number(reversedLine[i]));
+                    }
 
-            firstArray.push(line[i])
-            lastArray.push(reversedLine[i])
+                    lastArray.push(reversedLine[i]);
 
-            const lineSubStringFirst = firstArray.join('')
-            console.log('lineSubStringFirst', lineSubStringFirst)
-            const lineSubStringLast = lastArray.join('')
-            console.log('lineSubStringLast', lineSubStringLast)
+                    const lineSubStringLast = lastArray.join('');
 
-            for (const [key, value] of Object.entries(numberLettersMap)) {
-                if (lineSubStringFirst.includes(key)) {
-                    firstWordNumber = value
-                    finalFirstNumber.push(firstWordNumber);
-                    console.log('finalFirstNumber', finalFirstNumber)
+                    for (const [key, value] of Object.entries(reversedNumberLettersMap)) {
+                    if (lineSubStringLast.includes(key)) {
+                        finalLastNumber.push(value);
+                        }
+                    }
                 }
             }
-            for (const [key, value] of Object.entries(reversedNumberLettersMap)) {
-                if (lineSubStringLast.includes(key)) {
-                    lastWordNumber = value
-                    finalLastNumber.push(lastWordNumber);
-                    console.log('finalLastNumber', finalLastNumber)
-                }
-            }
-            
-            if ((firstNumber || firstWordNumber) && (lastNumber || lastWordNumber)) {
-                console.log(`finalFirstNumber: ${finalFirstNumber} and finalLastNumber: ${finalLastNumber}`)
-                break;
-            }
-        }
+        console.log('finalLastNumber', finalLastNumber)
 
         const finalLineNumber = finalFirstNumber.concat(finalLastNumber);
 
