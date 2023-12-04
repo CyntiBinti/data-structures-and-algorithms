@@ -15,7 +15,7 @@ function partOne() {
     console.log('PART 1 ANSWER:', numbers.reduce((prev, curr) => prev + curr))
 }
 
-// partOne();
+partOne();
 
 function partTwo() {
     const numberLettersMap = {
@@ -66,8 +66,6 @@ function partTwo() {
                     }
                 }
             }
-        console.log('finalFirstNumber', finalFirstNumber)
-
 
         // to get the LAST number
         let finalLastNumber = [];
@@ -91,17 +89,14 @@ function partTwo() {
                     }
                 }
             }
-        console.log('finalLastNumber', finalLastNumber)
+            
+        const finalLineNumber = `${finalFirstNumber}${finalLastNumber}`
 
-        const finalLineNumber = finalFirstNumber.concat(finalLastNumber);
-
-        console.log('finalLineNumber:', finalLineNumber)
-
-        return finalLineNumber;
+        return Number(finalLineNumber);
     })
     
 
-    // console.log('PART 2 ANSWER:', numbers.reduce((prev, curr) => prev + curr))
+    console.log('PART 2 ANSWER:', numbers.reduce((prev, curr) => prev + curr))
 }
 
 partTwo();
