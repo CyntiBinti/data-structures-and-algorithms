@@ -47,13 +47,49 @@ function partOne() {
         }
     }
     
-    console.log('possibleGameIDs:', possibleGameIDs)
-    console.log('gameIDs Totals:', possibleGameIDs.reduce((prev, curr) => prev + curr))
+    console.log('Part 1 Answer:', possibleGameIDs.reduce((prev, curr) => prev + curr))
 }
 
 
 function partTwo() {
-    // something
+    let sumOfAllPowers = [];
+
+    for (const line of lines) {
+        let highestRedValue = 0
+        let highestGreenValue = 0
+        let highestBlueValue = 0
+
+        const game = line.replace(':', ',').replaceAll(';', ',').split(',')
+        game.shift();
+        
+        for (const cube of game) {
+
+            if (cube.endsWith('red')) {
+                const redCubeValue = Number(cube.trim().split(' ')[0])
+                if (redCubeValue > highestRedValue) {
+                    highestRedValue = redCubeValue
+                }
+            }
+            if (cube.endsWith('green')) {
+                const greenCubeValue = Number(cube.trim().split(' ')[0])
+                if (greenCubeValue > highestGreenValue) {
+                    highestGreenValue = greenCubeValue
+                }
+            }
+            if (cube.endsWith('blue')) {
+                const blueCubeValue = Number(cube.trim().split(' ')[0])
+                if (blueCubeValue > highestBlueValue) {
+                    highestBlueValue = blueCubeValue
+                }
+            }
+        }
+
+        const gameSumOfPowers = (highestRedValue * highestGreenValue * highestBlueValue)
+
+        sumOfAllPowers.push(gameSumOfPowers);
+    }
+    
+    console.log('Part 2 Answer:', sumOfAllPowers.reduce((prev, curr) => prev + curr))
 }
 
 partOne();
