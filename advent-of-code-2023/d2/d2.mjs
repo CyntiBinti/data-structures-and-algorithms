@@ -6,36 +6,54 @@ const lines = readFileSync("d2/d2-input.txt", { encoding: "utf-8" })
   .split("\n"); // Split where it finds a single new line and create an array
 
 function partOne() {
-    let gameIDs = [];
+    let possibleGameIDs = [];
 
     for (const line of lines) {
-        const gameSets = line.replaceAll(';', ',').replace(':', ',').split(',');
-        const gameID = Number(gameSets[0].split(' ')[1]);
-        let totalRedCubes = 0;
-        let totalGreenCubes = 0;
-        let totalBlueCubes = 0;
+        let isSetPossible = true;
+
+        const game = line.replaceAll(':', ';').split(';');
+        const gameID = Number(game[0].split(' ')[1]);
+        game.shift();
         
-        for (const cube of gameSets) {
-            if (cube.endsWith('red')) {
-                totalRedCubes += Number(cube.trim().split(' ')[0])
-            }
-            if (cube.endsWith('green')) {
-                totalGreenCubes += Number(cube.trim().split(' ')[0])
-            }
-            if (cube.endsWith('blue')) {
-                totalBlueCubes += Number(cube.trim().split(' ')[0])
+        for (const sets of game) {
+            const cubes = sets.split(',');
+
+            for (let i = 0; i < cubes.length; i++) {
+                if (isSetPossible) {
+                    if (cubes[i].endsWith('red')) {
+                        const redCubeValue = Number(cubes[i].trim().split(' ')[0])
+                        if (redCubeValue > 12) {
+                            isSetPossible = false;
+                            }
+                    }
+                    if (cubes[i].endsWith('green')) {
+                        const greenCubeValue = Number(cubes[i].trim().split(' ')[0])
+                        if (greenCubeValue > 13) {
+                            isSetPossible = false;
+                            }
+                    }
+                    if (cubes[i].endsWith('blue')) {
+                        const blueCubeValue = Number(cubes[i].trim().split(' ')[0])
+                        if (blueCubeValue > 14) {
+                            isSetPossible = false;
+                            }
+                    }
+                }
             }
         }
 
-        console.log(`gameID: ${gameID}, reds: ${totalRedCubes}, greens: ${totalGreenCubes}, blues: ${totalBlueCubes}`)
-
-        if (totalRedCubes < 13 && totalGreenCubes < 14 && totalBlueCubes < 15) {
-            gameIDs.push(gameID)
+        if (isSetPossible) {
+            console.log('set IS possible! 😃')
+            possibleGameIDs.push(gameID);
+        } else {
+            console.log('set is NOT possible! 😭')
         }
     }
-    console.log('possible gameIDs:', gameIDs)
-    console.log('gameIDs Totals:', gameIDs.reduce((prev, curr) => prev + curr))
+    
+    console.log('possibleGameIDs:', possibleGameIDs)
+    console.log('gameIDs Totals:', possibleGameIDs.reduce((prev, curr) => prev + curr))
 }
+
 
 function partTwo() {
     // something
