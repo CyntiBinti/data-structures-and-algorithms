@@ -43,10 +43,7 @@ function partOne() {
         }
 
         if (isSetPossible) {
-            console.log('set IS possible! 😃')
             possibleGameIDs.push(gameID);
-        } else {
-            console.log('set is NOT possible! 😭')
         }
     }
     
