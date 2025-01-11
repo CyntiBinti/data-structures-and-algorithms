@@ -36,13 +36,26 @@ Follow up: Could you implement a solution that runs in O(n) time complexity and 
  * @return {boolean}
  */
 const increasingTriplet = function (nums) {
-	for (let i = 0; i < nums.length; i++) {
-		for (let j = i + 1; j < nums.length; j++) {
-			for (let k = j + 1; k < nums.length; k++) {
-				if (nums[i] < nums[j] && nums[j] < nums[k]) {
-					return true;
-				}
+	if (nums.length < 3) return false;
+
+	let thirdTriplet = nums[nums.length - 1]; // assume the last number in the array is the largest
+	let secondTriplet;
+
+	// start the loop from the 2nd to last element; work backwards to find a triplet
+	for (let i = nums.length - 2; i >= 0; i--) {
+		if (secondTriplet === undefined && nums[i] < thirdTriplet) {
+			secondTriplet = nums[i];
+		}
+
+		if (nums[i] > thirdTriplet) {
+			thirdTriplet = nums[i];
+		}
+
+		if (nums[i] < thirdTriplet) {
+			if (nums[i] < secondTriplet) {
+				return true;
 			}
+			secondTriplet = nums[i];
 		}
 	}
 	return false;
@@ -54,20 +67,3 @@ console.log(increasingTriplet([2, 1, 5, 0, 4, 6])); // true
 console.log(increasingTriplet([20, 100, 10, 12, 5, 13])); // true
 console.log(increasingTriplet([0, 4, 2, 1, 0, -1, -3])); // false
 console.log(increasingTriplet([1, 5, 0, 4, 1, 3])); // true
-
-// const increasingTriplet = function (nums) {
-// 	while (nums.length > 0) {
-// 		const firstTriplet = nums.shift();
-// 		const remainingTriplets = nums.filter((num) => num > firstTriplet);
-// 		if (remainingTriplets.length >= 2) {
-// 			for (let i = 0; i < remainingTriplets.length; i++) {
-// 				for (let j = i + 1; j < remainingTriplets.length; j++) {
-// 					if (remainingTriplets[j] > remainingTriplets[i]) {
-// 						return true;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	return false;
-// };
