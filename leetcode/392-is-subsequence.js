@@ -32,14 +32,23 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
  * @return {boolean}
  */
 const isSubsequence = function (s, t) {
-	// could use either regex .match() or two-pointer perhaps
-	let regexBuilder = '';
-	for (const char of [...s]) {
-		regexBuilder += `(${char})[a-z]*`;
+	let i = 0;
+	let j = 0;
+
+	if (s === t) {
+		return true;
 	}
-	const regex = new RegExp(regexBuilder, 'gm');
-	const match = regex.test(t);
-	return match;
+
+	while (i < t.length) {
+		if (s[j] === t[i]) {
+			j++;
+			i++;
+		} else {
+			i++;
+		}
+	}
+
+	return j === s.length ? true : false;
 };
 
 console.log(isSubsequence('abc', 'ahbgdc')); // true
