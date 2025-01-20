@@ -38,29 +38,31 @@ s consists of lowercase English letters.
  * @return {number}
  */
 const maxVowels = function (s, k) {
-	let substring = [];
-	let count = 0;
+	let currentWindowVowels = 0;
 	let maxVowels = 0;
-	let i = 0;
 
-	while (i < s.length) {
-		substring.push(s[i]);
-		count++;
-		i++;
+	const vowels = new Set(['a', 'e', 'i', 'o', 'u']); // set.has() is faster than array.indexOf()
 
-		if (count === k) {
-			const matches = substring.join('').match(/(a|e|i|o|u)+/gm);
-			if (matches) {
-				maxVowels = Math.max(maxVowels, matches.join('').length);
-				substring.shift();
-				count--;
-			} else {
-				substring.shift();
-				count--;
-			}
+	// get first window of vowels
+	for (let i = 0; i < k; i++) {
+		if (vowels.has(s[i])) {
+			currentWindowVowels++;
 		}
 	}
 
+	maxVowels = Math.max(maxVowels, currentWindowVowels);
+
+	// slide the window to check subsequent characters for a new maxVowels
+	for (let i = k; i < s.length; i++) {
+		if (vowels.has(s[i])) {
+			currentWindowVowels++;
+		}
+		if (vowels.has(s[i - k])) {
+			currentWindowVowels--;
+		}
+
+		maxVowels = Math.max(maxVowels, currentWindowVowels);
+	}
 	return maxVowels;
 };
 
