@@ -1,7 +1,8 @@
 /*
-Given an integer array nums, return true if any value
-appears at least twice in the array, and return false
-if every element is distinct.
+
+LEVEL: EASY
+
+Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 
 # Example 1:
 
@@ -17,33 +18,27 @@ Output: false
 
 Input: nums = [1,1,1,3,3,4,3,2,4,2]
 Output: true
+
 */
 
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+const containsDuplicate = function(nums) {
+	const set = new Set();
 
-let containsDuplicate = function(nums) {
-    nums.sort((a, b) => a-b)
-    
-    for (let i = 0; i <nums.length; i++) {
-        console.log(`nums[i] is: ${nums[i]}`);
-        for (let j = 0; j < i; j++) {
-        console.log(`nums[j] is: ${nums[j]}`);
-        if (nums[j] === nums[i]) {
-            return true;
-        }
-    }
-}
-    return false;
+	for (const number of nums) {
+		if (!set.has(number)) {
+			set.add(number);
+		} else {
+			return true;
+		}
+	}
+
+	return false;
 }
 
-containsDuplicate([1,2,3,4]);
-VM1039:5 nums[i] is: 1
-VM1039:5 nums[i] is: 2
-VM1039:7 nums[j] is: 1
-VM1039:5 nums[i] is: 3
-VM1039:7 nums[j] is: 1
-VM1039:7 nums[j] is: 2
-VM1039:5 nums[i] is: 4
-VM1039:7 nums[j] is: 1
-VM1039:7 nums[j] is: 2
-VM1039:7 nums[j] is: 3
-false
+console.log(containsDuplicate([1,2,3,1])); // true
+console.log(containsDuplicate([1,2,3,4])); // false
+console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); // true
