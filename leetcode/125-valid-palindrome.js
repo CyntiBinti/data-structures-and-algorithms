@@ -37,16 +37,35 @@ s consists only of printable ASCII characters.
  * @return {boolean}
  */
 var isPalindrome = function (s) {
-	const onlyAlphanumericChars = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+	const lowercaseString = s.toLowerCase();
+	const onlyAlphanumericCharsRegex = /[a-z0-9]/;
+	let left = 0;
+	let right = lowercaseString.length - 1;
 
-	if (onlyAlphanumericChars === '') {
-		return true;
+	while (left < right) {
+		while (
+			left < right &&
+			!onlyAlphanumericCharsRegex.test(lowercaseString[left])
+		) {
+			left++;
+		}
+
+		while (
+			right > left &&
+			!onlyAlphanumericCharsRegex.test(lowercaseString[right])
+		) {
+			right--;
+		}
+
+		if (lowercaseString[left] !== lowercaseString[right]) {
+			return false;
+		}
+
+		left++;
+		right--;
 	}
 
-	return (
-		onlyAlphanumericChars ===
-		onlyAlphanumericChars.split('').reverse().join('')
-	);
+	return true;
 };
 
 console.log(isPalindrome('A man, a plan, a canal: Panama')); // true

@@ -24,6 +24,8 @@ Constraints:
 -30 <= nums[i] <= 30
 The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
+Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
+
 */
 
 /**
@@ -31,13 +33,7 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
  * @return {number[]}
  */
 const productExceptSelf = function (nums) {
-	return nums.map((_, index, array) => {
-		return array.toSpliced(index, 1).reduce((prev, curr) => prev * curr);
-	});
-
-	/*
-		NB: use of toSpliced inside the map function is causing the function to perform poorly on larger datasets (e.g num lengths of >50k). The toSpliced method creates a new array on each iteration, and the subsequent reduce operation adds another layer of complexity, making the overall time complexity approximately 𝑂(𝑛2). Will redo as 𝑂(𝑛) time instead.
-	*/
+	//
 };
 
 console.log(productExceptSelf([1, 2, 3, 4])); // [24,12,8,6]
