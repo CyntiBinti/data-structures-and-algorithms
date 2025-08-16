@@ -39,7 +39,22 @@ Constraints:
 */
 
 function reorderLayers(layers, oldIndex, newIndex) {
-	// Your implementation here
+	if (
+		!Array.isArray(layers) ||
+		layers.length === 0 ||
+		oldIndex < 0 ||
+		oldIndex >= layers.length ||
+		newIndex < 0 ||
+		newIndex >= layers.length ||
+		oldIndex === newIndex
+	) {
+		return layers;
+	}
+
+	const [item] = layers.splice(oldIndex, 1);
+	layers.splice(newIndex, 0, item);
+
+	return layers;
 }
 
 // Test cases
