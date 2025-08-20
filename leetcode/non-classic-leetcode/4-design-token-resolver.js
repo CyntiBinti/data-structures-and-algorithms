@@ -13,6 +13,11 @@ The function should:
 - Handle circular references by throwing an error
 - Return the resolved string
 
+How nested tokens work (see example 2 as ref.):
+- Inner tokens resolve first: {size} → 'large'
+- Result substitutes into outer path: {spacing.{size}} → {spacing.large}
+- Final token resolves: {spacing.large} → '20px'
+
 Example 1:
 Input: resolveTokens('Color: {color.primary}', { color: { primary: '#FF0000' } })
 Output: 'Color: #FF0000'
@@ -20,6 +25,7 @@ Output: 'Color: #FF0000'
 Example 2:
 Input: resolveTokens('Size: {spacing.{size}}', { spacing: { large: '20px' }, size: 'large' })
 Output: 'Size: 20px'
+Note: {size} resolves to 'large', making the path {spacing.large} → '20px'
 
 Example 3:
 Input: resolveTokens('No tokens here', { color: { primary: '#FF0000' } })

@@ -1,3 +1,12 @@
+/**
+Implement two classes:
+- Layer(name) with toggleVisibility()
+- FigmaDoc that manages multiple Layer instances
+Supports:
+- add, remove, and print layers
+- toggle layer visibility
+ */
+
 class Layer {
 	isVisible = true;
 
@@ -5,12 +14,12 @@ class Layer {
 		this.name = name;
 	}
 
-	toggleVisbility() {
+	toggleVisibility() {
 		this.isVisible = !this.isVisible;
 	}
 }
 
-class Document {
+class FigmaDoc {
 	layersMap = new Map();
 	layerCount = 0;
 
@@ -44,7 +53,7 @@ class Document {
 
 	printLayers() {
 		console.log(
-			`there are currently ${this.layerCount} layers created in this document:`
+			`there are currently ${this.layerCount} layers created in this FigmaDoc:`
 		);
 		this.layersMap.forEach((layer) => {
 			console.log(
@@ -55,7 +64,7 @@ class Document {
 }
 
 // testcases
-const doc = new Document();
+const doc = new FigmaDoc();
 doc.addNewLayer('Background');
 doc.addNewLayer('Background');
 doc.removeLayer('Button');

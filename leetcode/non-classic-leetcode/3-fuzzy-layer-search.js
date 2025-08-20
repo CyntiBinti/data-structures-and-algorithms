@@ -81,7 +81,7 @@ function fuzzySearchLayers(layers, query) {
 			let gap = 0;
 
 			// find where to start (first occurrence of query[0])
-      // so gap count not increasing from the beginning unnecessarily
+			// so gap count not increasing from the beginning unnecessarily
 			let startIndex = lowercaseLayer.indexOf(lowercaseQuery[0]);
 			if (startIndex === -1) return; // no possible match, skip this layer
 
@@ -97,9 +97,9 @@ function fuzzySearchLayers(layers, query) {
 				}
 			}
 
-      // once all query chars have been matched
+			// once all query chars have been matched
 			if (j === lowercaseQuery.length) {
-        // use math.max to prevent negative scores
+				// use math.max to prevent negative scores
 				const score = Math.max(0, 1 - gap * 0.1);
 				result.push({ layer: layer, score: score });
 			}
