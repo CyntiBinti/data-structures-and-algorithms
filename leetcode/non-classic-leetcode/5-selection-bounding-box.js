@@ -3,7 +3,7 @@
 // ==============================================
 
 /*
-LEVEL: MEDIUM
+LEVEL: MEDIUM-HARD
 
 Create a function called calculateBounds that takes an array of shapes (with x, y, width, height properties) and returns the bounding box that encompasses all selected shapes.
 
